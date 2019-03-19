@@ -52,7 +52,6 @@ for f in onlyfiles:
                         else:
                             stats[year_number][number_value][position_number] +=1
                         i+=1
-        print(i)
         
 tuples = []
 for years in stats.items():
