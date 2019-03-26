@@ -3,7 +3,18 @@ from elasticsearch.client import IndicesClient
 from pprint import pprint
 es = Elasticsearch()
 
-print("Ilość słów \"ustawa\" (z odmianami) " + str(es.search(
+
+
+# print("test " + str(es.indices.analyze(
+#         "my_index",
+#         {
+#             "tokenizer": "standard",
+#              "filter": ["synonyms", "lowercase", "morfologik_stem"],
+#             "text": "będę analizować ustawy o kc"
+#         }
+#     )))
+
+print("Ilość plików w których znaleziono słowo \"ustawa\" (z odmianami) " + str(es.search(
     index="my_index",
     doc_type="_doc",
     body={

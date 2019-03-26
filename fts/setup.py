@@ -9,31 +9,35 @@ print(es.indices.create(
     body={
         "settings": {
             "analysis": {
-                "analyzer": "morfologik",
-                "filter": {
-                    "pl_synonym" : {
-                        "type" : "synonym",
+              "analyzer" : {
+                    "synonym" : {
+                        "tokenizer" : "standard",
+                        "filter" : ["kodeks_synonym", "lowercase","morfologik_stem"]
+                    }
+                },
+              "filter": {
+                  "kodeks_synonym" : {
+                    "type" : "synonym",
                         "synonyms" : [
                             "kpk => kodeks postępowania karnego",
                             "kpc => kodeks postępowania cywilnego",
                             "kk => kodeks karny",
                             "kc => kodeks cywilny"
                         ]
-                    }
-                },
-                "filter": ["lowercase","morfologik_stem"]   
-                }
-            },
-            "mappings": {
-                "_doc": {
-                    "properties": {
-                        "text": {
-                            "type": "text",
-                            "analyzer": "morfologik"
-                        }
+                    }    
+                  }
+            }
+        },
+        "mappings": {
+            "_doc": {
+                "properties": {
+                    "text": {
+                        "type": "text",
+                        "analyzer": "morfologik"
                     }
                 }
-            }   
+            }
+        }
         }
     
 )
