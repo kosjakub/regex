@@ -4,13 +4,18 @@ from os import listdir
 from os.path import isfile, join
 
 es = Elasticsearch()
-es.indices.delete(index='my_index', ignore=[400, 404])
 print(es.indices.create(
     index="my_index",
     body={
         "settings": {
             "analysis": {
-                "filter": {
+              "analyzer" : {
+                    "synonym" : {
+                        "tokenizer" : "standard",
+                        "filter" : ["kodeks_synonym", "lowercase","morfologik_stem"]
+                    }
+                },
+              "filter": {
                   "kodeks_synonym" : {
                     "type" : "synonym",
                         "synonyms" : [
@@ -20,14 +25,7 @@ print(es.indices.create(
                             "kc => kodeks cywilny"
                         ]
                     }    
-                  },
-     
-              "analyzer" : {
-                    "my_analyzer" : {
-                        "tokenizer" : "standard",
-                        "filter" : ["kodeks_synonym", "lowercase","morfologik_stem"]
-                    }
-                }
+                  }
             }
         },
         "mappings": {
@@ -35,7 +33,7 @@ print(es.indices.create(
                 "properties": {
                     "text": {
                         "type": "text",
-                        "analyzer": "my_analyzer"
+                        "analyzer": "morfologik"
                     }
                 }
             }
