@@ -9,10 +9,12 @@ for f in onlyfiles:
     with open(join("./ustawy", f), encoding='utf-8') as f:
         i = 0
         text = f.read()
+        # szukamy (Dz ....)
         references = r.findall(r'(\(Dz\.\s*U\.\s*[^\)]*\))', text)
         tmp = [x.replace("\n", '') for x in references]
         references_years = []
         for t in tmp:
+            # dzielimy na lata
             reg2 = r.findall(r'(\d{4}\s*r\.[^\)]*?(?=\d{4}\s*r\.))|(\d{4}\s*r\.[^\)]*(?=\)))|(Nr[^\)]*?(?=\d{4}\s*r\.))|(Nr[^\)]*(?=\)))', t)
             for r2 in reg2:
                 for c in r2: 
@@ -23,6 +25,7 @@ for f in onlyfiles:
         reference_positions = []
 
         for referece_year in references_years:
+            # wyciągamy te z latami
             year_tmp = r.findall(r'\d+\s*(?=r\.)', referece_year)
             if len(year_tmp) != 0:
                 year_number = int(year_tmp[0]) 
@@ -31,18 +34,22 @@ for f in onlyfiles:
             if year_number not in stats:
                 stats[year_number] = {}  
 
+            # wyciągamy te bez lat
             reg3 = r.findall(r'(Nr.*?poz[\s,.\di]*)', referece_year)
             for reference_number in reg3:
                 if reference_number != '':
                     references_numbers.append(reference_number)
+                    # wyciągamy numery
                     r_tmp = r.findall(r'(?<=Nr)\s*\d+', reference_number)
                     if len(r_tmp) == 0:
                         break
                     number_value = int(r.findall(r'(?<=Nr)\s*\d+', reference_number)[0])
                     if number_value not in stats[year_number]:
                         stats[year_number][number_value] = {}
+                    # wyciągamy wszystkie pozycje
                     reg4 = r.findall(r'(?<=poz.)[\s\S\d]*', reference_number)
                     reference_positions.append(reg4[0])
+                    # wyciągamy poszczególne pozycje 
                     reg5 = r.findall(r'\d{1,4}', reg4[0])
 
                     for position in reg5:
