@@ -15,6 +15,17 @@ The task concentrates on the usage of a WordNet for finding semantic relations b
 1. Find closure of **hypernymy** relation for the first meaning of the _wypadek drogowy_ expression.
    Create diagram of the relations as a directed graph.
 1. Find direct **hyponyms** of _wypadek<sub>1</sub>_ noun.
+   1. zdarzenie
+   1. kolizja
+   1. karambol
+   1. zawał
+   1. tąpnięcie
+   1. kapotaż
+   1. wykolejenie
+   1. zakrztuszenie
+   1. wypadek komunikacyjny
+   1. katastrofa budowlana
+   1. wypadek jądrowy
 1. Find second-order **hyponyms** of the same noun.
 1. Display as a directed graph (with labels for the edges) semantic relations between the following groups of lexemes:
    1. szkoda<sub>2</sub>, strata<sub>1</sub>, uszczerbek<sub>1</sub>, szkoda majątkowa<sub>1</sub>, 
