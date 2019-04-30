@@ -36,9 +36,6 @@ for sense in ss("szkoda"):
         for synonym in get_synonyms_by_senseId(info['id']):
             print("    " + str(synonym['word']))
         
-
-
-
 # Zadanie 2
 
 def synset_relations(synset, rel):
