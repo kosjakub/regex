@@ -25,6 +25,7 @@ def get_info(sense):
         "senseNumber": sense['senseNumber']
     }
 
+
 # Zadanie 1 
 # pprint(ss("szkoda"))
 for sense in ss("szkoda"):
